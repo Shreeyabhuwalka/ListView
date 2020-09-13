@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     ListView list;
@@ -27,6 +29,18 @@ public class MainActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.listView);
         MyAdapter adapter = new MyAdapter(this,mText,dec,image);
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i==0)
+                    Toast.makeText(MainActivity.this,"Facebook clicked!",Toast.LENGTH_SHORT).show();
+                if(i==1)
+                    Toast.makeText(MainActivity.this,"Whatsapp clicked",Toast.LENGTH_SHORT).show();
+                if(i==2)
+                    Toast.makeText(MainActivity.this,"Twitter clicked!",Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     class MyAdapter extends ArrayAdapter<String>
@@ -56,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             ImageView images = row.findViewById(R.id.image);
             TextView myTitle = row.findViewById(R.id.name);
             TextView myDes = row.findViewById(R.id.description);
+
 
             images.setImageResource(rImag[position]);
             myTitle.setText(rTitle[position]);
